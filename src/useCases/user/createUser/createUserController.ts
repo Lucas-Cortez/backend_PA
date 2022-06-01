@@ -1,11 +1,16 @@
-import { User } from "@prisma/client";
 import { Request, Response } from "express";
-import { CreateUserUseCase } from "./createUserUseCase";
+import { CreateUserUseCase } from "./CreateUserUseCase";
 
-class CreateUserController {
+export class CreateUserController {
   constructor(private createUserUseCase: CreateUserUseCase) {}
 
-  public async handle(request: Request, response: Response): Promise<User> {
-    return { name: "Lucas", email: "teste@gmail.com", id: 1, hash: "fapwojfabe121ud-b1d-0dn" };
+  public async handle(request: Request, response: Response): Promise<Response> {
+    const { name, email, password } = request.body;
+
+    console.log(this);
+    console.log({ name, email, password });
+    const user = await this.createUserUseCase.execute({ name, email, password });
+
+    return response.json(user);
   }
 }
