@@ -6,7 +6,6 @@ export class CreateUserUseCase {
   constructor(private prismaUserRepository: IUserRepository) {}
 
   public async execute(data: ICreateUserDTO): Promise<User> {
-    console.log(data);
     const { password, ...rest } = data;
 
     const hash = `hashed ${password}`;

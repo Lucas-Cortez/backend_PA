@@ -7,4 +7,4 @@ const prismaUserRepository = new PrismaUserRepository(prisma);
 const createUserUseCase = new CreateUserUseCase(prismaUserRepository);
 const createUserController = new CreateUserController(createUserUseCase);
 
-export { createUserController };
+export { createUserController, createUserUseCase };
