@@ -11,14 +11,9 @@ datasource db {
 }
 
 model Line {
-  id            Int     @unique @default(autoincrement())
+  id            Int             @unique @default(autoincrement())
   name          String
   description   String?
-  id_start_stop Int
-  stop_start    Stop    @relation("start", fields: [id_start_stop], references: [id])
-  id_end_stop   Int
-  stop_end      Stop    @relation("end", fields: [id_end_stop], references: [id])
-
   Stop_Line     Stop_Line[]
   Stop_Historic Stop_Historic[]
 
@@ -41,29 +36,30 @@ model Stop {
   longitude     Float
   Stop_Line     Stop_Line[]
   Stop_Historic Stop_Historic[]
-  start_line    Line[]          @relation("start")
-  end_line      Line[]          @relation("end")
 
   @@map("stops")
 }
 
 model Bus {
-  id       Int   @unique @default(autoincrement())
+  id       Int     @unique @default(autoincrement())
   capacity Int
   height   Float
   width    Float
   length   Float
   weight   Float
+  model    String?
+  active   Boolean
 
   @@map("bus")
 }
 
 model Stop_Line {
   id      Int  @unique @default(autoincrement())
-  line    Line @relation(fields: [id_line], references: [id])
+  order   Int
   id_line Int
-  stop    Stop @relation(fields: [id_stop], references: [id])
   id_stop Int
+  line    Line @relation(fields: [id_line], references: [id])
+  stop    Stop @relation(fields: [id_stop], references: [id])
 
   @@map("stops_lines")
 }
@@ -74,8 +70,8 @@ model Stop_Historic {
   entered_people Int
   left_people    Int
   id_line        Int
-  line           Line     @relation(fields: [id_line], references: [id])
   id_stop        Int
+  line           Line     @relation(fields: [id_line], references: [id])
   stop           Stop     @relation(fields: [id_stop], references: [id])
 
   @@map("stop_historic")
