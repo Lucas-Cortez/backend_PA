@@ -48,7 +48,7 @@ model Bus {
   length   Float
   weight   Float
   model    String?
-  active   Boolean
+  active   Boolean @default(false)
 
   @@map("bus")
 }

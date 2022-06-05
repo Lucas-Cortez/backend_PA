@@ -29,5 +29,8 @@
             "longitude": -1.422623
         }
     ```
-- Criação de linha
+- Criação de linha✅
+- Mostrar linhas✅
+- Mostrar pontos✅
+- Processar linhas
 - Adicionar historico

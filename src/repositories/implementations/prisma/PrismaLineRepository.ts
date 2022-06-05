@@ -19,4 +19,8 @@ export class PrismaLineRepository implements ILineRepository {
       include: { Stop_Line: true },
     });
   }
+
+  public async findAll(): Promise<Line[]> {
+    return this.prismaClient.line.findMany();
+  }
 }

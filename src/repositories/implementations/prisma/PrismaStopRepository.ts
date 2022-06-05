@@ -8,4 +8,8 @@ export class PrismaStopRepository implements IStopRepository {
   public async create(stop: ICreateStopDTO): Promise<Stop> {
     return await this.prismaClient.stop.create({ data: stop });
   }
+
+  public async findAll(): Promise<Stop[]> {
+    return await this.prismaClient.stop.findMany();
+  }
 }
