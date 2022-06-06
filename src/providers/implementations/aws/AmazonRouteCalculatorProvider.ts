@@ -1,6 +1,21 @@
-// import { Location, CognitoIdentityCredentials } from "aws-sdk";
+import { CognitoIdentityCredentials, Location } from "aws-sdk";
 
-// const credentials = new CognitoIdentityCredentials({
-//   IdentityPoolId: "us-east-1:eed0ba51-e10e-4b1f-9a19-aef787b73f38",
-// });
-// Location({});
+export class AmazonRouteCalculatorProvider {
+  private locationService: Location;
+
+  constructor(credentials: CognitoIdentityCredentials) {
+    this.locationService = new Location({ credentials });
+  }
+
+  public async calculate(route: ICalculateDTO): Promise<Location.CalculateRouteResponse> {
+    return await this.locationService.calculateRoute(route).promise();
+  }
+}
+
+interface ICalculateDTO {
+  CalculatorName: string;
+  DeparturePosition: number[];
+  DestinationPosition: number[];
+  DistanceUnit: string;
+  WaypointPositions: number[][];
+}

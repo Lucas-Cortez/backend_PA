@@ -1,4 +1,4 @@
-import { Line, PrismaClient } from "@prisma/client";
+import { Line, PrismaClient, Stop, Stop_Line } from "@prisma/client";
 import { ICreateLineDTO } from "../../../useCases/line/createLine/ICreateLineDTO";
 import { ILineRepository } from "../../ILineRepository";
 
@@ -22,5 +22,16 @@ export class PrismaLineRepository implements ILineRepository {
 
   public async findAll(): Promise<Line[]> {
     return this.prismaClient.line.findMany();
+  }
+
+  public async findAllStops(id: number): Promise<Stop[] | null> {
+    const data = await this.prismaClient.stop_Line.findMany({
+      where: { id_line: id },
+      select: { stop: true },
+    });
+
+    return data?.map((item) => {
+      return item.stop;
+    });
   }
 }

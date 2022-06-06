@@ -4,4 +4,5 @@ export interface ICreateBusDTO {
   width: number;
   length: number;
   weight: number;
+  model?: string;
 }
