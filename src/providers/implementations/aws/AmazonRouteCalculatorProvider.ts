@@ -1,6 +1,7 @@
 import { CognitoIdentityCredentials, Location } from "aws-sdk";
+import { ICalculateDTO, IRouteCalculatorProvider } from "../../IRouteCalculatorProvider";
 
-export class AmazonRouteCalculatorProvider {
+export class AmazonRouteCalculatorProvider implements IRouteCalculatorProvider {
   private locationService: Location;
 
   constructor(credentials: CognitoIdentityCredentials) {
@@ -10,12 +11,4 @@ export class AmazonRouteCalculatorProvider {
   public async calculate(route: ICalculateDTO): Promise<Location.CalculateRouteResponse> {
     return await this.locationService.calculateRoute(route).promise();
   }
-}
-
-interface ICalculateDTO {
-  CalculatorName: string;
-  DeparturePosition: number[];
-  DestinationPosition: number[];
-  DistanceUnit: string;
-  WaypointPositions: number[][];
 }

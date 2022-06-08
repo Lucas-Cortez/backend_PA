@@ -24,13 +24,13 @@ export class PrismaLineRepository implements ILineRepository {
     return this.prismaClient.line.findMany();
   }
 
-  public async findAllStops(id: number): Promise<Stop[] | null> {
+  public async findAllStops(id: number): Promise<Stop[]> {
     const data = await this.prismaClient.stop_Line.findMany({
       where: { id_line: id },
       select: { stop: true },
     });
 
-    return data?.map((item) => {
+    return data.map((item) => {
       return item.stop;
     });
   }
