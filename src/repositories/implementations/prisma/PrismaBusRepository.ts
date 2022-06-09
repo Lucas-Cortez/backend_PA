@@ -8,4 +8,8 @@ export class PrismaBusRepository implements IBusRepository {
   public async create(bus: ICreateBusDTO): Promise<Bus> {
     return await this.prismaClient.bus.create({ data: bus });
   }
+
+  public async findAll(): Promise<Bus[]> {
+    return await this.prismaClient.bus.findMany();
+  }
 }
