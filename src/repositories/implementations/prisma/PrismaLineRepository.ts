@@ -21,7 +21,9 @@ export class PrismaLineRepository implements ILineRepository {
   }
 
   public async findAll(): Promise<Line[]> {
-    return this.prismaClient.line.findMany({ include: { Stop_Line: { include: { stop: true } } } });
+    return this.prismaClient.line.findMany({
+      include: { Stop_Line: { select: { stop: true } } },
+    });
   }
 
   public async findAllStops(id: number): Promise<Stop[]> {
@@ -33,5 +35,9 @@ export class PrismaLineRepository implements ILineRepository {
     return data.map((item) => {
       return item.stop;
     });
+  }
+
+  public async delete(id: number): Promise<Line> {
+    return await this.prismaClient.line.delete({ where: { id: id } });
   }
 }

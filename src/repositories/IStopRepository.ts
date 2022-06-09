@@ -5,4 +5,6 @@ export interface IStopRepository {
   create(stop: ICreateStopDTO): Promise<Stop>;
 
   findAll(): Promise<Stop[]>;
+
+  delete(id: number): Promise<Stop>;
 }

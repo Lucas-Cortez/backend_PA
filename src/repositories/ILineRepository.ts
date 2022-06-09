@@ -7,4 +7,6 @@ export interface ILineRepository {
   findAll(): Promise<Line[]>;
 
   findAllStops(id: number): Promise<Omit<Stop_Line, "id" | "order" | "id_line" | "id_stop">[] | null>;
+
+  delete(id: number): Promise<Line>;
 }

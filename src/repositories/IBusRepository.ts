@@ -5,4 +5,6 @@ export interface IBusRepository {
   create(bus: ICreateBusDTO): Promise<Bus>;
 
   findAll(): Promise<Bus[]>;
+
+  delete(id: number): Promise<Bus>;
 }

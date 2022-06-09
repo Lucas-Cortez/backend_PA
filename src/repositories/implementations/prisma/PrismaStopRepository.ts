@@ -12,4 +12,8 @@ export class PrismaStopRepository implements IStopRepository {
   public async findAll(): Promise<Stop[]> {
     return await this.prismaClient.stop.findMany();
   }
+
+  public async delete(id: number): Promise<Stop> {
+    return await this.prismaClient.stop.delete({ where: { id: id } });
+  }
 }

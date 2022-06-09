@@ -12,4 +12,8 @@ export class PrismaBusRepository implements IBusRepository {
   public async findAll(): Promise<Bus[]> {
     return await this.prismaClient.bus.findMany();
   }
+
+  public async delete(id: number): Promise<Bus> {
+    return await this.prismaClient.bus.delete({ where: { id: id } });
+  }
 }

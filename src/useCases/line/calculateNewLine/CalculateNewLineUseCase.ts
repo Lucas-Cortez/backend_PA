@@ -10,7 +10,8 @@ export class CalculateNewLineUseCase {
     private amazonRouteCalculatorProvider: AmazonRouteCalculatorProvider
   ) {}
 
-  public async execute(id: number): Promise<Location.CalculateRouteResponse | null> {
+  public async execute(id: number): Promise<resp> {
+    // public async execute(id: number): Promise<Location.CalculateRouteResponse | null> {
     // public async execute(id: number): Promise<Stop[] | null> {
     const data = await this.prismaLineRepository.findAllStops(id);
     // console.log(data);
@@ -110,7 +111,23 @@ export class CalculateNewLineUseCase {
 
     // console.log(calculated.Legs.length);
     // console.log(newCalculated.length);
-    return calculated;
+    // return calculated;
+    return res;
     // return data;
   }
 }
+
+type resp = {
+  route: {
+    totalStops: number;
+    stops: Stop[];
+    distance: number;
+    seconds: number;
+  };
+  newRoute: {
+    totalStops: number;
+    stops: Stop[];
+    distance: number;
+    seconds: number;
+  } | null;
+};
